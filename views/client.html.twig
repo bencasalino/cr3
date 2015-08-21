@@ -1,39 +1,39 @@
 <html>
     <head>
-        <title>Cuisine</title>
+        <title>client</title>
         <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
         <link rel='stylesheet' href='/styles/styles.css' />
     </head>
     <body>
         <div class="container">
-            <h1>{{ cuisine.getName}}</h1>
-                {% for dollar in 1..cuisine.getPrice %}
+            <h1>{{ client.getName}}</h1>
+                {% for dollar in 1..client.getPrice %}
                     <img src="/img/dollar.gif" width="48" height="48" alt="dolla dolla bill yall"/>
                 {% endfor %}
 
-            {% if cuisine.getSpicy %}
+            {% if client.getSpicy %}
                 <p><img src="/img/chili.gif" height="48" width="48">! Watch out! Make sure to stay hydrated!</p>
             {% else %}
                 <p><strong>NOT</strong> <img src="/img/chili.gif" height="48" width="48">. No problemo!</p>
             {% endif %}
 
-            {% if restaurants is not empty %}
-                <p>Here are the restaurants:</p>
+            {% if stylists is not empty %}
+                <p>Here are the stylists:</p>
                 <ul>
-                    {% for restaurant in restaurants %}
-                        <li><h4>{{ restaurant.getName}}</h4>
+                    {% for stylist in stylists %}
+                        <li><h4>{{ stylist.getName}}</h4>
                             <ul>
 
-                                <li>Seats: {{ restaurant.getSeats }}</li>
-                                <li>Location: {{ restaurant.getLocation }}</li>
+                                <li>Seats: {{ stylist.getSeats }}</li>
+                                <li>Location: {{ stylist.getLocation }}</li>
 
-                                {% if restaurant.getEvenings == false %}
+                                {% if stylist.getEvenings == false %}
                                     <li>Don't bother dining here at night</li>
                                 {% else %}
                                     <li>You're welcome to eat here after 5</li>
                                 {% endif %}
-                                <li><!-- button to edit restaurant here -->
-                                    <a href="/restaurants/{{ restaurant.getId }}">Edit resto</a>
+                                <li><!-- button to edit stylist here -->
+                                    <a href="/stylists/{{ stylist.getId }}">Edit resto</a>
                                 </li>
                             </ul>
                         </li>
@@ -41,41 +41,24 @@
                 </ul>
             {% endif %}
 
-            <p><a href="/cuisines/{{ cuisine.getId }}/edit">Edit this cuisine</a></p>
+            <p><a href="/clients/{{ client.getId }}/edit">Edit this Stylist info</a></p>
 
             <p><a href="/">Home</a></p>
 
-            <h3>Add a restaurant</h3>
+            <h3>Add a Stylist </h3>
 
-            <form action='/restaurants' method='post'>
+            <form action='/stylists' method='post'>
                 <div class="form-group">
-                    <input id='cuisine_id' name='cuisine_id' type='hidden' value='{{ cuisine.getId }}'>
-                    <label for='name'>Restaurant Name</label>
+                    <input id='client_id' name='client_id' type='hidden' value='{{ client.getId }}'>
+                    <label for='name'>Stylist Name</label>
                     <input id='name' name='name' type='text' required>
                 </div>
 
-                <div class="form-group">
-                    <label for='seats'>Seats:</label>
-                    <input id='seats' name='seats' type='number' min="0" required>
-                </div>
-
-                <div class="form-group">
-                    <label for='location'>Location:</label>
-                    <input id='location' name='location' type='text' required>
-                </div>
-
-                <div class="form-group">
-                    <label for='evenings'>Open Evenings?</label>
-                    <br />
-                    <input type="radio" name="evenings" value="1" required>
-                        We are totes Open in the evenings generally bro!! Come on in!!<br>
-                    <input type="radio" name="evenings" value="0" required>
-                        We are Closed all the evenings tho!! Lo Siento!!! <br>
-                </div>
 
 
 
-                <button type='submit' class="btn btn-success">Add restaurant</button>
+
+                <button type='submit' class="btn btn-success">Add a Stylist</button>
             </form>
 
             <p><a href='/'>Home</a></p>

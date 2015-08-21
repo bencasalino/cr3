@@ -2,23 +2,23 @@
     <head>
         <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
         <link rel='stylesheet' href='/styles/styles.css' />
-        <title>Edit cafe</title>
+        <title>Edit this Stylist inforomation </title>
     </head>
     <body>
-        <h1>Update the {{ restaurant.getName }} ristoranto </h1>
+        <h1>Update the {{ stylist.getName }} stylist name.  </h1>
 
-        <form action="/restaurants/{{ restaurant.getId }}" method="post">
+        <form action="/stylists/{{ stylist.getId }}" method="post">
             <input name="_method" type="hidden" value="patch">
 
-            <label for="name">Change the name of your bistro:</label>
+            <label for="name">Change the name of your Stylist:</label>
             <input id="name" name="name" type="text">
             <button type="submit">Update name</button>
         </form>
 
-        <form action="/restaurants/{{ restaurant.getId }}" method="post">
+        <form action="/stylists/{{ stylist.getId }}" method="post">
             <input name="_method" type="hidden" value="delete">
 
-            <button type="submit">Delete this brewpub</button>
+            <button type="submit">Delete this Name. </button>
         </form>
     </body>
 </html>
