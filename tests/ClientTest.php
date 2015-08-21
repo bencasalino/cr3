@@ -4,32 +4,30 @@
     * @backupStatic Attributes disabled
     */
 
-    require_once "src/Cuisine.php";
-    require_once "src/Restaurant.php";
+    require_once "src/client.php";
+    require_once "src/stylist.php";
 
     $server = 'mysql:host=localhost;dbname=food_finder_test';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
 
-    class CuisineTest extends PHPUnit_Framework_TestCase
+    class ClientTest extends PHPUnit_Framework_TestCase
     {
         protected function tearDown()
         {
-            Restaurant::deleteAll();
-            Cuisine::deleteAll();
+            Stylist::deleteAll();
+            Client::deleteAll();
         }
 
         function test_getName()
         {
             //Arrange
-            $test_name = "Albanian";
-            $test_spicy = false;
-            $test_price = 3;
-            $test_cuisine = new Cuisine( $test_name, $test_spicy, $test_price);
+            $test_name = "Sara";
+            $test_client = new Client( $test_name);
 
             //Act
-            $result = $test_cuisine->getName();
+            $result = $test_client->getName();
 
             //Assert
             $this->assertEquals($test_name, $result);
@@ -37,53 +35,17 @@
 
         }
 
-        function test_getSpicy()
-        {
-            //Arrange
-            $test_name = "German";
-            $test_spicy = false;
-            $test_price = 5;
-            $test_cuisine = new Cuisine( $test_name, $test_spicy, $test_price);
-
-            //Act
-            $result = $test_cuisine->getSpicy();
-
-            //Assert
-            $this->assertEquals($test_spicy, $result);
-
-
-        }
-
-        function test_getPrice()
-        {
-            //Arrange
-            $test_name = "Indian";
-            $test_spicy = true;
-            $test_price = 1;
-            $test_cuisine = new Cuisine( $test_name, $test_spicy, $test_price);
-
-            //Act
-            $result = $test_cuisine->getPrice();
-
-            //Assert
-            $this->assertEquals($test_price, $result);
-
-
-        }
 
         function test_getId()
 
         {
             //Arrange
-            $test_name = "Dogfood";
-            $test_spicy = false;
-            $test_price = 3;
-            $test_cuisine = new Cuisine ($test_name, $test_spicy, $test_price) ;
-            $test_cuisine->save();
+            $test_name = "Bobby";
+            $test_client = new Client ($test_name) ;
+            $test_client->save();
 
             //Act
-            //$result = $test_cuisine->getId();
-            $result = Cuisine::getAll()[0]->getId();
+            $result = Client::getAll()[0]->getId();
 
             //Assert
             $this->assertEquals(true, is_numeric($result));
@@ -93,88 +55,68 @@
 
         {
             //Arrange
-            $test_name = " Itilanooooo ";
-            $test_spicy = true;
-            $test_price = 4;
-            $test_cuisine = new Cuisine ($test_name, $test_spicy, $test_price) ;
-            $test_cuisine->save();
+            $test_name = " Sue ";
+            $test_client = new Client ($test_name) ;
+            $test_client->save();
 
             //Act
-            $result = Cuisine::getAll();
+            $result = client::getAll();
 
             //Assert
-            $this->assertEquals($test_cuisine, $result[0]);
+            $this->assertEquals($test_client, $result[0]);
         }
 
         function test_getAll()
         {
             //c1
             //Arrange
-            $test_name = "Lebanoony";
-            $test_spicy = true;
-            $test_price = 4;
-            $test_cuisine = new Cuisine ($test_name, $test_spicy, $test_price) ;
-            $test_cuisine->save();
+            $test_name = " Jack ";
+            $test_client = new Client ($test_name) ;
+            $test_client->save();
 
-            $test_name2 = " Mexican ";
-            $test_spicy2 = false;
-            $test_price2 = 3;
-            $test_cuisine2 = new Cuisine ($test_name2, $test_spicy2, $test_price2) ;
-            $test_cuisine2->save();
+            $test_name2 = " Jill ";
+            $test_client2 = new Client ($test_name2) ;
+            $test_client2->save();
 
             //Act
-            $result = Cuisine::getAll();
+            $result = client::getAll();
 
             //Assert
-            $this->assertEquals([$test_cuisine, $test_cuisine2], $result);
+            $this->assertEquals([$test_client, $test_client2], $result);
         }
 
-        function test_getRestaurants()
+        function test_getStylists()
         {
             //Arrange
-            $test_cuisine = new Cuisine("Lebanese", false, 5);
-            $test_cuisine->save();
-            $test_cuisine_id = $test_cuisine->getId();
+            $test_client = new Client("Newman");
+            $test_client->save();
+            $test_client_id = $test_client->getId();
 
-            $test_restaurant1 = new Restaurant("Bens Bulkogi", 50, "eastside", true, $test_cuisine_id);
-            $test_restaurant1->save();
-            //var_dump($test_restaurant1);
+            $test_stylist1 = new Stylist("George ", $test_client_id);
+            $test_stylist1->save();
+            //var_dump($test_stylist1);
 
-            $test_restaurant2 = new Restaurant("Marios Pizza Hole", 35, "Hole", false, $test_cuisine_id);
-            $test_restaurant2->save();
+            $test_stylist2 = new Stylist(" Kramer ", $test_client_id);
+            $test_stylist2->save();
 
             //Act
-            $result = $test_cuisine->getRestaurants();
+            $result = $test_client->getstylists();
 
             //Assert
-            $this->assertEquals([$test_restaurant1, $test_restaurant2], $result);
+            $this->assertEquals([$test_stylist1, $test_stylist2], $result);
             //$this->assertEquals([], $result);
         }
 
-        function test_updatePrice()
-        {
-            //Arrange
-            $test_cuisine = new Cuisine ("american", false, 4);
-            $test_cuisine->save();
-
-            //Act
-            $new_price = 5;
-            $test_cuisine->updatePrice($new_price);
-            $result = Cuisine::getAll();
-
-            //Assert
-            $this->assertEquals($new_price, $result[0]->getPrice());
-        }
 
         function test_delete()
         {
             //Arrange
-            $test_cuisine = new Cuisine("american", false, 4);
-            $test_cuisine->save();
+            $test_client = new Client("Bob", 4);
+            $test_client->save();
 
             //Act
-            $test_cuisine->delete();
-            $result = Cuisine::getAll();
+            $test_client->delete();
+            $result = Client::getAll();
 
             //Assert
             $this->assertEquals([], $result);
