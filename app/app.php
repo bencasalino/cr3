@@ -39,7 +39,7 @@
         ));
     });
 
-    // [C]reate client, display all clients
+    // [C]reate client, display all clients 
     $app->post("/clients", function() use ($app) {
         $client = new Client(
             $_POST['name'],

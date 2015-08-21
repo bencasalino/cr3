@@ -3,6 +3,7 @@
     {
         private $name;
         private $id;
+        //private client_id ?
 
         function __construct ($new_name, $new_id = null)
         {
@@ -11,6 +12,7 @@
         }
 
         //getters
+        //get name
         function getName()
         {
             return $this->name;
@@ -23,6 +25,7 @@
         }
 
         // Setter
+        // set name
         function setName()
         {
               $this->name = (string) $new_name;
@@ -30,6 +33,7 @@
 
         //Database storage methods
         //CRUD Create
+        // save a name that has just been changed?
         function save()
         {
             $GLOBALS['DB']->exec(
@@ -42,6 +46,8 @@
         }
 
         //CRUD Read
+        // gets all from stylists column, runs that through a loop to grab name,id to then return all clients?
+        // not sure if this part is correct
         static function getAll()
         {
             $db_stylists = $GLOBALS['DB']->query("SELECT * FROM stylists;");
@@ -56,7 +62,7 @@
             return $all_clients;
         }
 
-
+        // function to return information from a single Stylist
         function getStylists()
         {
             $matching_stylists = array();
@@ -80,18 +86,20 @@
         // update not needed??????
 
         //CRUD Delete
+        //deletes the stylist name that was just updated
         function delete()
         {
           $GLOBALS ['DB']->exec ("DELETE FROM clients WHERE id = {$this->getId()};");
 
         }
-
+        // if you need to delete more than 1 client from the list
         static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM clients;");
         }
 
         //CRUD Read
+        // find a client in the db by using its id# need to add this to index.html.twig
         static function find($search_id)
         {
             $found_client = null;
