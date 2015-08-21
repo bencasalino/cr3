@@ -7,7 +7,7 @@
         private $client_id;
         private $id;
 
-        //instance
+        // 
         function __construct ($new_name, $new_client_id, $new_id = null)
         {
             $this->name = (string) $new_name;
