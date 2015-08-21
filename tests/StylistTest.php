@@ -5,40 +5,37 @@
     * @backupStatic Attributes disabled
     */
 
-    require_once "src/Restaurant.php";
-    require_once "src/Cuisine.php";
+    require_once "src/stylist.php";
+    require_once "src/client.php";
 
     $server = 'mysql:host=localhost;dbname=food_finder_test';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
 
-    class RestaurantTest extends PHPUnit_Framework_TestCase
+    class StylistTest extends PHPUnit_Framework_TestCase
     {
         protected function tearDown()
         {
-            Restaurant::deleteAll();
-            Cuisine::deleteAll();
+            Stylist::deleteAll();
+            Client::deleteAll();
         }
 
         function test_getName()
         {
             //Arrange
-            $test_name = "Mario's Pizza";
-            $test_seats = 100;
-            $test_location = "Downtown";
-            $test_evenings = true;
+            $test_name = "Bob";
 
-            $test_cuisine = new Cuisine("Mexican", true, 1);
-            $test_cuisine->save();
+            $test_client = new Client("Bob", 1);
+            $test_client->save();
 
-            $test_restaurant = new Restaurant(
-              $test_name, $test_seats, $test_location, $test_evenings, $test_cuisine->getId()
+            $test_stylist = new Stylist(
+              $test_name, $test_client->getId()
             );
-            $test_restaurant->save();
+            $test_stylist->save();
 
             //Act
-            $result = $test_restaurant->getName();
+            $result = $test_stylist->getName();
 
 
             //Assert
@@ -46,218 +43,108 @@
         }
 
 
-        function test_getSeats()
-        {
-            //Arrange
-            $test_name = " bens bulkogis ";
-            $test_seats = 50;
-            $test_location = " eastside";
-            $test_evenings = true;
-
-            $test_cuisine = new Cuisine("Mexican", true, 1);
-            $test_cuisine->save();
-
-            $test_restaurant = new Restaurant(
-              $test_name, $test_seats, $test_location, $test_evenings, $test_cuisine->getId()
-            );
-            $test_restaurant->save();
-
-            //Act
-            $result = $test_restaurant->getSeats();
-
-            //Assert
-            $this->assertEquals($test_seats, $result);
-        }
-
-        function test_getLocation()
-        {
-            //Arrange
-            $test_name = "Ashlin's Asparagus Apothecary";
-            $test_seats = 3;
-            $test_location = "underground";
-            $test_evenings = false;
-            $test_cuisine = new Cuisine("Mexican", true, 1);
-            $test_cuisine->save();
-
-            $test_restaurant = new Restaurant(
-              $test_name, $test_seats, $test_location, $test_evenings, $test_cuisine->getId()
-            );
-            $test_restaurant->save();
-
-            //Act
-            $result = $test_restaurant->getLocation();
-
-            //Assert
-            $this->assertEquals($test_location, $result);
-        }
-
-        function test_getEvenings()
-        {
-            //Arrange
-            $test_name = "Ellen's Excellent Egg Sanctuary";
-            $test_seats = 15;
-            $test_location = "Farmville";
-            $test_evenings = false;
-            $test_cuisine = new Cuisine("Mexican", true, 1);
-            $test_cuisine->save();
-
-            $test_restaurant = new Restaurant(
-              $test_name, $test_seats, $test_location, $test_evenings, $test_cuisine->getId()
-            );
-            $test_restaurant->save();
-
-            //Act
-            $result = $test_restaurant->getEvenings();
-
-            //Assert
-            $this->assertEquals($test_evenings, $result);
-        }
-
         function test_save()
         {
             //Arrange
-            $test_name = "Toms Tomatos ";
-            $test_seats = 15;
-            $test_location = "Farmville";
-            $test_evenings = false;
-            $test_cuisine = new Cuisine("Mexican", true, 1);
-            $test_cuisine->save();
+            $test_name = "Tom ";
+            $test_client = new client("Tom", 3);
+            $test_client->save();
 
-            $test_restaurant = new Restaurant(
-              $test_name, $test_seats, $test_location, $test_evenings, $test_cuisine->getId()
+            $test_stylist = new stylist(
+              $test_name, $test_client->getId()
             );
-            $test_restaurant->save();
+            $test_stylist->save();
 
             //Act
-            $result = Restaurant::getAll();
+            $result = stylist::getAll();
 
             //Assert
-            $this->assertEquals($test_restaurant, $result[0]);
+            $this->assertEquals($test_stylist, $result[0]);
         }
 
         function test_getAll()
         {
 
             //Arrange
-            //r 1
-            $test_name = "Toms Tomatos ";
-            $test_seats = 15;
-            $test_location = "Farmville";
-            $test_evenings = true;
-            $test_cuisine = new Cuisine("Mexican", true, 1);
-            $test_cuisine->save();
+            //client 1
+            $test_name = " Fred ";
+            $test_client = new Client("Fred", 4);
+            $test_client->save();
 
-            $test_restaurant = new Restaurant(
-              $test_name, $test_seats, $test_location, $test_evenings, $test_cuisine->getId()
+            $test_stylist = new Stylist(
+            $test_name, $test_client->getId()
+
             );
-            $test_restaurant->save();
+            $test_stylist->save();
 
             //r 2
-            $test_name2 = "bobs Tomatos ";
-            $test_seats2 = 13335;
-            $test_location2 = "feild";
-            $test_evenings2 = true;
-            $test_cuisine2 = new Cuisine("Appalachian", false, 1);
-            $test_cuisine2->save();
+            $test_name2 = " Jay ";
+            $test_client2 = new Client("Jay", 5);
+            $test_client2->save();
 
-            $test_restaurant2 = new Restaurant(
-              $test_name2, $test_seats2, $test_location2, $test_evenings2, $test_cuisine2->getId()
+            $test_stylist2 = new Stylist(
+              $test_name2,  $test_client2->getId()
             );
-            $test_restaurant2->save();
+            $test_stylist2->save();
 
 
             //Act
-            $result = Restaurant::getAll();
+            $result = stylist::getAll();
 
             //Assert
-            $this->assertEquals([$test_restaurant, $test_restaurant2], $result);
+            $this->assertEquals([$test_stylist, $test_stylist2], $result);
         }
-
-
-        function test_updateName()
-        {
-            //Arrange
-            $test_name = "Toms Tomatos ";
-            $test_seats = 15;
-            $test_location = "Farmville";
-            $test_evenings = true;
-            $test_cuisine = new Cuisine("Mexican", true, 1);
-            $test_cuisine->save();
-
-            $test_restaurant = new Restaurant(
-              $test_name, $test_seats, $test_location, $test_evenings, $test_cuisine->getId()
-            );
-            $test_restaurant->save();
-
-            //Act
-            $new_name = "Annie Applesauce";
-            $test_restaurant->updateName($new_name);
-            $result = Restaurant::getAll();
-
-            //Assert
-            $this->assertEquals($new_name, $result[0]->getName());
-            //if $new_name == $result[0] return true;
-        }
-
 
         function test_delete()
         {
             //Arrange
             //r 1
-            $test_name = "Toms Tomatos ";
-            $test_seats = 15;
-            $test_location = "Farmville";
-            $test_evenings = true;
-            $test_cuisine = new Cuisine("Mexican", true, 1);
-            $test_cuisine->save();
+            $test_name = " Ben";
+            $test_client = new Client("Ben", 6);
+            $test_client->save();
 
-            $test_restaurant = new Restaurant(
-              $test_name, $test_seats, $test_location, $test_evenings, $test_cuisine->getId()
+            $test_stylist = new Stylist(
+              $test_name, $test_client->getId()
             );
-            $test_restaurant->save();
+            $test_stylist->save();
 
             //r 2
-            $test_name2 = "bobs Tomatos ";
-            $test_seats2 = 13335;
-            $test_location2 = "feild";
-            $test_evenings2 = true;
-            $test_cuisine2 = new Cuisine("Appalachian\'s", false, 1);
-            $test_cuisine2->save();
+            $test_name2 = " Frank ";
+            $test_client2 = new Client("Frank", 7);
+            $test_client2->save();
 
-            $test_restaurant2 = new Restaurant(
-              $test_name2, $test_seats2, $test_location2, $test_evenings2, $test_cuisine2->getId()
+            $test_stylist2 = new Stylist(
+              $test_name2,  $test_client2->getId()
+
             );
-            $test_restaurant2->save();
+            $test_stylist2->save();
 
 
             //Act
-            $test_restaurant2->delete();
+            $test_stylist2->delete();
 
             //Assert
-            $this->assertEquals([$test_restaurant], Restaurant::getAll());
+            $this->assertEquals([$test_stylist], Stylist::getAll());
 
         }
 
         function test_find()
         {
             //Arrange
-            $test_name = "Toms Tomatos ";
-            $test_seats = 15;
-            $test_location = "Farmville";
-            $test_evenings = true;
-            $test_cuisine = new Cuisine("Mexican", true, 1);
-            $test_cuisine->save();
+            $test_name = "Jerry ";
+            $test_client = new client("Jerry", 9);
+            $test_client->save();
 
-            $test_restaurant = new Restaurant(
-              $test_name, $test_seats, $test_location, $test_evenings, $test_cuisine->getId()
+            $test_stylist = new Stylist(
+              $test_name, $test_client->getId()
             );
-            $test_restaurant->save();
+            $test_stylist->save();
 
             //Act
-            $result = Restaurant::find($test_restaurant->getId());
+            $result = Stylist::find($test_stylist->getId());
 
             //Assert
-            $this->assertEquals($test_restaurant, $result);
+            $this->assertEquals($test_stylist, $result);
         }
 
     }
