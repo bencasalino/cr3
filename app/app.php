@@ -1,8 +1,8 @@
 <?php
     //set up
     require_once __DIR__."/../vendor/autoload.php";
-    require_once __DIR__."/../src/Cuisine.php";
-    require_once __DIR__."/../src/Restaurant.php";
+    require_once __DIR__."/../src/Client.php";
+    require_once __DIR__."/../src/Stylist.php";
 
     // We need to enable patch and delete http methods in order to use them for routes
     use Symfony\Component\HttpFoundation\Request;
