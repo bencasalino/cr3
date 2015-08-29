@@ -1,11 +1,14 @@
-Code Review 3 
+Code Review 3
 {Website.}, {8/21/15}
 
 By {Ben Casalino}
 
 Description
 
-{.}
+
+An app for a hair salon that displays a list of stylist, and for each stylist, shows clients that see that stylist.
+
+
 
 Setup
 
