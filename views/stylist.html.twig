@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <title>Stylist List</title>
+        <!-- needed for bootsrap -->
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+    </head>
+    <body>
+        <div class='container'>
+
+            <h1>Stylist {{ stylist.getName }}</h1>
+
+            {% if clients is not empty %}
+
+                <p>Here are the clients:</p>
+                <ul>
+                    {% for client in clients %}
+
+                        <li>{{ client.getName }}</li>
+                        <li><a href='/client/{{ client.getId }}/edit'>Edit this client</a></li>
+                    {% endfor %}
+
+                </ul>
+            {% endif %}
+
+            <h4>Add a client here </h4>
+
+            <form action='/clients' method='post' class="form-inline">
+                <div class='form-group'>
+
+                    <input id='stylist_id' name='stylist_id' type='hidden' value='{{ stylist.getId }}'>
+                    <label for='name'>Client Name</label>
+                    <input id='name' name='name' class='form-control' type='text'>
+                </div>
+
+
+                <button type='submit' class='btn btn-info'>Add a client</button>
+            </form>
+
+            <form action='/delete_clients' method='post'>
+                <button type='submit' class='btn btn-danger'>Clear all the  clients</button>
+            </form>
+
+            <p><a href="/stylist/{{ stylist.getId }}/edit">Edit this stylist</a></p>
+
+            <p><a href='/'>Home page link </a></p>
+        </div>
+    </body>
+</html>
