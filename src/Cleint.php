@@ -18,3 +18,8 @@
             Client::deleteAll();
             Stylist::deleteAll();
         }
+
+
+
+
+?>
