@@ -1,4 +1,4 @@
-# cr3
+Code Review 3 
 {Website.}, {8/21/15}
 
 By {Ben Casalino}
@@ -9,19 +9,9 @@ Description
 
 Setup
 
-_install Composer
-_install Silex
-_install Twig
-Technologies Used
+_install Composer _install Silex _install Twig Technologies Used
 
-_PHP
-_HTML
-_Silex
-_ Twig
-_PHPunit
-_MAMP
-_mySql
-
+_PHP _HTML _Silex _ Twig _PHPunit _MAMP _mySql
 
 Legal
 
