@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+        <title>Edit all of the stylist info!!</title>
+    </head>
+    <body>
+        <div class="container">
+
+        <h1>Update the  {{ stylist.getName }} Name</h1>
+
+        <form action="/stylists/{{ stylists.getId }}" method="post">
+            <input name="_method" type="hidden" value="patch">
+                <div class="form-group">
+                    <label for="name">Rename the stylist:</label>
+                    <input id="name" name="name" type="text">
+                </div>
+
+          <button type="submit" class="btn btn-warning">Update!</button>
+        </form>
+
+        <form action="/stylists/{{ stylists.getId }}" method="post">
+            <input name="_method" type="hidden" value="delete">
+
+            <button type="submit" class="btn btn-danger">Delete this particular stylist</button>
+        </form>
+    </body>
+</html>

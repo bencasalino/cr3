@@ -5,32 +5,31 @@
     </head>
     <body>
         <div class='container-fluid'>
-            <h1>Hair Salon</h1>
-
-            <p>Add a new stylist here:</p>
-
-            <form action="/stylists" method="post">
+            <h1>Ben's Salon</h1>
+            <p>Add a Stylist:</p>
+            <form action='/stylists' method='post'>
                 <div class='form-group'>
-                    <label for="name">Stylist name:  </label>
-                    <input id="name" name="name" class='form-control' type="text">
+                    <label for='name'>Stylist name:</label>
+                    <input id='name' name='name' type='text'>
                 </div>
-                <button type="submit" class='btn btn-info'>Add Stylist here</button>
+                <button type="submit" class="btn btn-primary">Add  a new Stylist!</button>
             </form>
-
-            <form action='/delete_stylists' method='post'>
-                <button type='submit' class='btn btn-danger'>Clear button</button>
-            </form>
-
             {% if stylists is not empty %}
-                <p>Here are all of of the stylists:</p>
+                <p>Here are all the stylists available:</p>
                 <ul>
                     {% for stylist in stylists %}
-                        <li><a href="/stylist/{{ stylist.getId }}">{{ stylist.getName }}</a></li>
+                    <li><a href="/stylists/{{ stylist.getId }}">{{ stylist.getName }}</a></li>
                     {% endfor %}
                 </ul>
             {% else %}
-                <p>You have no stylists right now! sorry!</p>
+                <p>There are no stylists...yet!</p>
             {% endif %}
+
+            <form action='/delete_stylists' method='post'>
+                <div class="form-group">
+                    <button type='submit' class='btn btn-info'>Delete all of the stylists</button>
+                </div>
+            </form>
         </div>
     </body>
 </html>

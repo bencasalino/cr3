@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <title>Ben's Salon</title>
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+    </head>
+    <body>
+        <div class="container">
+            <h1>{{ stylists.getName }}</h1>
+
+            {% if clients is not empty %}
+                <p>Here are all of the Clients:</p>
+                <ul>
+                    {% for client in clients %}
+                        <li><strong>{{ client.getName }}</strong></li>
+                            <ul>
+                                <li>{{ client.getPhone }}</li>
+                                <li>{{ client.getStyleChoice }}</li>
+                            </ul>
+                            <form action='/clients/{{ client.getId }}/edit'>
+                                <div class="form-group">
+                                    <button type="submit" class='btn btn-primary'>Edit client info</button>
+                                </div>
+                            </form>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <h4>Add a new  Client</h4>
+
+            <form action='/clients' method='post'>
+                <div class="form-group">
+                    <input id='stylist_id' name='stylist_id' type='hidden' value='{{ stylists.getId }}'>
+                    <label for='name'>Client Name</label>
+                    <input id='name' name='name' type='text'>
+                </div>
+                <div class="form-group">
+                    <label for='phone'>Phone number</label>
+                    <input id='phone' name='phone' type='text'>
+                </div>
+                <div class="form-group">
+                    <label for='style_choice'>Style Choice</label>
+                    <input id='style_choice' name='style_choice' type='text'>
+                </div>
+
+                <button type='submit' class="btn btn-success">Add  a new Client</button>
+            </form>
+
+            <form action='/stylists/{{ stylists.getId }}/edit'>
+                <div class="form-group">
+                    <button type="submit" class='btn btn-primary'>Edit this individual stylist's information</button>
+                </div>
+            </form>
+            <p><a href='/'>Home</a></p>
+        </div>
+    </body>
+</html>
