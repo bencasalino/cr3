@@ -6,6 +6,7 @@
     require_once __DIR__."/../src/Client.php";
 
     $app = new Silex\Application();
+    // $app['debug'] = true;
 
     //Tells app how to access sql phpmyadmin database
     $server = 'mysql:host=localhost;dbname=hair_salon';
@@ -29,7 +30,7 @@
 
 
 
-    //lists all the stylits on the home page
+    // lets user create new stylist, saves to the db and displays it on the homepage
     $app->post("/stylists", function() use ($app) {
         $stylist = new Stylist($_POST['name']);
         $stylist->save();
@@ -41,7 +42,7 @@
         Stylist::deleteAll();
         return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
     });
-    
+
     //needed
     return $app;
   ?>
