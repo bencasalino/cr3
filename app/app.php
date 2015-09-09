@@ -9,7 +9,7 @@
     // $app['debug'] = true;
 
     //Tells app how to access sql phpmyadmin database
-    $server = 'mysql:host=localhost;dbname=hair_salon';
+    $server = 'mysql:host=localhost:8889;dbname=hair_salon';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
@@ -23,28 +23,12 @@
     use Symfony\Component\HttpFoundation\Request;
     Request::enableHttpMethodParameterOverride();
 
-    //Path to homepage
-    $app->get("/", function() use ($app) {
-        return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
-    });
-
-
-
-    // lets user create new stylist, saves to the db and displays it on the homepage
-    $app->post("/stylists", function() use ($app) {
-        $stylist = new Stylist($_POST['name']);
-        $stylist->save();
-        return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
-    });
-
-    // clear function
-    $app->post("/clear", function() use ($app) {
-        Stylist::deleteAll();
-        return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
-    });
 
     //needed
     return $app;
   ?>
+
+
+  update file from old version that uses mysql from the FIRST friday original
 
     ?>
