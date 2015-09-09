@@ -16,6 +16,9 @@ _install Composer _install Silex _install Twig Technologies Used
 
 _PHP _HTML _Silex _ Twig _PHPunit _MAMP _mySql
 
+
+(to install mysql must link to 8889 anywhere mysql is listed ) 
+
 Legal
 
 {This is boilerplate legal language. Read through it, and if you like it, use it. There are other license agreements online, but you can generally copy and paste this.}
